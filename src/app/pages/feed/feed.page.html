@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Feed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Feed</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshFeed($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Chargement du feed...</p>
+  </div>
+
+  <div *ngIf="!loading && entries.length === 0" class="empty-state">
+    <ion-icon name="film" size="large"></ion-icon>
+    <p>Aucune activité récente</p>
+    <p>Soyez le premier à partager un film !</p>
+  </div>
+
+  <div *ngIf="!loading && entries.length > 0" class="feed-container">
+    <ion-card *ngFor="let entry of entries" class="entry-card" (click)="goToMovie(entry.movieId)">
+      <ion-card-content>
+        <div class="entry-header">
+          <div class="user-info">
+            <ion-avatar>
+              <ion-img src="/assets/default-avatar.png" alt="Avatar"></ion-img>
+            </ion-avatar>
+            <div class="user-details">
+              <p class="username">Utilisateur</p>
+              <p class="date">{{ entry.watchedAt | date:'dd/MM/yyyy' }}</p>
+            </div>
+          </div>
+          <div class="rating">
+            <span class="stars">{{ getStars(entry.rating) }}{{ getEmptyStars(entry.rating) }}</span>
+          </div>
+        </div>
+        
+        <div class="movie-info">
+          <ion-img [src]="getImageUrl(entry.posterPath)" [alt]="entry.title" class="movie-poster"></ion-img>
+          <div class="movie-details">
+            <h3>{{ entry.title }}</h3>
+            <p *ngIf="entry.review" class="review">{{ entry.review }}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

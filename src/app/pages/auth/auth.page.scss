@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.auth-container {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: var(--ion-color-primary);
+}
+
+.auth-container p {
+  font-size: 1.1rem;
+  color: var(--ion-color-medium);
+  margin-bottom: 40px;
+}
+
+.google-button {
+  --border-radius: 8px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  height: 50px;
+  font-size: 1rem;
+}

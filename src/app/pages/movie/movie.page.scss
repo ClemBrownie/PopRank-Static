@@ -1,0 +1,112 @@
+.movie-header {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+
+.movie-info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  height: 100%;
+  align-items: flex-end;
+}
+
+.poster {
+  width: 120px;
+  height: 180px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.details {
+  flex: 1;
+  color: white;
+}
+
+.details h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.year, .genres {
+  margin: 4px 0;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+.rating {
+  margin: 8px 0 16px 0;
+  font-size: 0.9rem;
+  color: #ffd700;
+}
+
+.add-button {
+  --background: var(--ion-color-primary);
+  --color: white;
+  margin-top: 12px;
+}
+
+.movie-content {
+  padding: 20px;
+}
+
+.tagline {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+.modal-content {
+  padding: 16px 0;
+}
+
+.movie-preview {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+}
+
+.modal-poster {
+  width: 80px;
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.movie-preview h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.movie-preview p {
+  margin: 0;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.confirm-button {
+  margin-top: 24px;
+  --background: var(--ion-color-primary);
+  --color: white;
+}

@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-content">
+      <ion-img src="/assets/logo.png" alt="PopRank Logo" class="header-logo"></ion-img>
+      <div class="header-title">
+        <h1>PopRank</h1>
+        <span class="page-subtitle">Vues</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Vues</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshWatchedMovies($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="page-container">
+    <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Chargement de vos films vus...</p>
+  </div>
+
+  <div *ngIf="!loading && entries.length === 0" class="empty-state">
+    <div class="logo-container">
+      <ion-img src="/assets/logo.png" alt="PopRank Logo" class="logo"></ion-img>
+    </div>
+    <p>Aucun film vu</p>
+    <p>Commencez par rechercher et noter des films !</p>
+  </div>
+
+  <div *ngIf="!loading && entries.length > 0" class="watched-container">
+    <div class="stats-header">
+      <h2>Mes films vus</h2>
+      <p class="count">{{ entries.length }} film(s) au total</p>
+    </div>
+    
+    <div class="entries-grid">
+      <ion-card *ngFor="let entry of entries" (click)="goToMovie(entry.movieId)" class="entry-card">
+        <ion-img [src]="getImageUrl(entry.posterPath)" [alt]="entry.title" class="movie-poster"></ion-img>
+        <ion-card-content class="entry-content">
+          <h3>{{ entry.title }}</h3>
+          <div class="entry-meta">
+            <div class="rating">
+              <span class="stars">{{ getStars(entry.rating) }}{{ getEmptyStars(entry.rating) }}</span>
+            </div>
+            <div class="date">
+              {{ entry.watchedAt | date:'dd/MM/yyyy' }}
+            </div>
+          </div>
+          <p *ngIf="entry.review" class="review">{{ entry.review }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    </div>
+  </div>
+</ion-content>

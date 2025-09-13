@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-content">
+      <ion-img src="/assets/logo.png" alt="PopRank Logo" class="header-logo"></ion-img>
+      <div class="header-title">
+        <h1>PopRank</h1>
+        <span class="page-subtitle">À voir</span>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">À voir</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshWatchlist($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="page-container">
+    <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Chargement de votre liste de souhaits...</p>
+  </div>
+
+  <div *ngIf="!loading && watchlist.length === 0" class="empty-state">
+    <div class="logo-container">
+      <ion-img src="/assets/logo.png" alt="PopRank Logo" class="logo"></ion-img>
+    </div>
+    <p>Votre liste de souhaits est vide</p>
+    <p>Ajoutez des films à votre liste "À voir" depuis la recherche !</p>
+    <ion-button (click)="goToSearch()" fill="solid" class="search-button">
+      <ion-icon name="search" slot="start"></ion-icon>
+      Rechercher des films
+    </ion-button>
+  </div>
+
+  <div *ngIf="!loading && watchlist.length > 0" class="watchlist-container">
+    <div class="stats-header">
+      <h2>Ma liste de souhaits</h2>
+      <p class="count">{{ watchlist.length }} film(s) à voir</p>
+    </div>
+    
+    <div class="movies-grid">
+      <ion-card *ngFor="let movie of watchlist" (click)="goToMovie(movie.id)" class="movie-card">
+        <ion-img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="movie-poster"></ion-img>
+        <ion-card-content class="movie-content">
+          <h3>{{ movie.title }}</h3>
+          <div class="movie-meta">
+            <p class="year">{{ movie.release_date | date:'yyyy' }}</p>
+            <p class="rating">⭐ {{ movie.vote_average | number:'1.1-1' }}/10</p>
+          </div>
+          <ion-button 
+            (click)="removeFromWatchlist(movie.id); $event.stopPropagation()" 
+            fill="clear" 
+            size="small"
+            class="remove-button">
+            <ion-icon name="bookmark" slot="start"></ion-icon>
+            Retirer
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+/* Styles pour le contenu principal */
+.app-main {
+  background: var(--ion-background-color);
+  min-height: 100vh;
+}
+
+.app-content {
+  background: var(--ion-background-color);
+  min-height: 100vh;
+}
+
+/* Amélioration des transitions */
+.app-layout {
+  transition: all 0.3s ease;
+}

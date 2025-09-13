@@ -41,6 +41,32 @@
   box-sizing: border-box;
 }
 
+/* Classe globale pour les états vides sans scrollbar */
+.no-scroll-empty-state {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* S'assurer que les états vides n'ont pas de scrollbar */
+.empty-state,
+.loading-container {
+  min-height: 60vh;
+  max-height: 60vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
   margin: 0;

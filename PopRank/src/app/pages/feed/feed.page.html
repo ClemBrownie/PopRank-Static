@@ -24,10 +24,17 @@
         <div class="entry-header">
           <div class="user-info">
             <ion-avatar>
-              <ion-img src="/assets/default-avatar.png" alt="Avatar"></ion-img>
+              <img 
+                [src]="getAvatarUrl(entry)" 
+                [alt]="entry.userDisplayName || 'Utilisateur'"
+                (error)="onImageError($event)"
+                (load)="onImageLoad($event)"
+                class="avatar-image"
+                loading="lazy"
+                crossorigin="anonymous">
             </ion-avatar>
             <div class="user-details">
-              <p class="username">Utilisateur</p>
+              <p class="username">{{ entry.userDisplayName || 'Utilisateur' }}</p>
               <p class="date">{{ entry.watchedAt | date:'dd/MM/yyyy' }}</p>
             </div>
           </div>

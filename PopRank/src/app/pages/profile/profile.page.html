@@ -10,7 +10,14 @@
     <ion-card-content>
       <div class="profile-header">
         <ion-avatar class="profile-avatar">
-          <ion-img [src]="user.avatarUrl || '/assets/default-avatar.png'" [alt]="user.displayName"></ion-img>
+          <img 
+            [src]="getAvatarUrl()" 
+            [alt]="user.displayName"
+            (error)="onImageError($event)"
+            (load)="onImageLoad($event)"
+            class="avatar-image"
+            loading="lazy"
+            crossorigin="anonymous">
         </ion-avatar>
         <div class="profile-info">
           <h2>{{ user.displayName }}</h2>

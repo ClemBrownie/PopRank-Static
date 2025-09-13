@@ -1,19 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, IonButton } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
 import { Movie } from '../../models/movie.model';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, IonButton, CommonModule, FormsModule]
 })
 export class SearchPage implements OnInit {
   private tmdbService = inject(TmdbService);
@@ -21,40 +19,41 @@ export class SearchPage implements OnInit {
   
   movies: Movie[] = [];
   loading = false;
-  private searchSubject = new Subject<string>();
+  searchQuery = '';
+  hasSearched = false;
 
   constructor() { }
 
   ngOnInit() {
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap(query => {
-        if (query.trim()) {
-          this.loading = true;
-          return this.tmdbService.searchMovies(query);
-        } else {
-          this.movies = [];
-          this.loading = false;
-          return [];
-        }
-      })
-    ).subscribe({
-      next: (result) => {
-        this.movies = result.results || [];
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Erreur de recherche:', error);
-        this.movies = [];
-        this.loading = false;
-      }
-    });
+    // Plus besoin de la recherche automatique
   }
 
-  onSearch(event: any) {
-    const query = event.target.value;
-    this.searchSubject.next(query);
+  onSearchInput(event: any) {
+    this.searchQuery = event.target.value;
+  }
+
+  onSearch() {
+    if (this.searchQuery.trim()) {
+      this.hasSearched = true;
+      this.loading = true;
+      this.tmdbService.searchMovies(this.searchQuery.trim()).subscribe({
+        next: (result) => {
+          this.movies = result.results || [];
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error('Erreur de recherche:', error);
+          this.movies = [];
+          this.loading = false;
+        }
+      });
+    }
+  }
+
+  clearSearch() {
+    this.searchQuery = '';
+    this.movies = [];
+    this.hasSearched = false;
   }
 
   goToMovie(movieId: number) {

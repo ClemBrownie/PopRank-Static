@@ -31,4 +31,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/search/search.page').then( m => m.SearchPage),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'watched',
+    loadComponent: () => import('./pages/watched/watched.page').then( m => m.WatchedPage),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'watchlist',
+    loadComponent: () => import('./pages/watchlist/watchlist.page').then( m => m.WatchlistPage),
+    canActivate: [AuthGuard]
+  },
 ];

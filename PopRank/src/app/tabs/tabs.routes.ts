@@ -7,14 +7,24 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'feed',
-        loadComponent: () =>
-          import('../pages/feed/feed.page').then((m) => m.FeedPage),
-      },
-      {
         path: 'search',
         loadComponent: () =>
           import('../pages/search/search.page').then((m) => m.SearchPage),
+      },
+      {
+        path: 'watched',
+        loadComponent: () =>
+          import('../pages/watched/watched.page').then((m) => m.WatchedPage),
+      },
+      {
+        path: 'watchlist',
+        loadComponent: () =>
+          import('../pages/watchlist/watchlist.page').then((m) => m.WatchlistPage),
+      },
+      {
+        path: 'feed',
+        loadComponent: () =>
+          import('../pages/feed/feed.page').then((m) => m.FeedPage),
       },
       {
         path: 'profile',
@@ -23,14 +33,14 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/feed',
+        redirectTo: '/tabs/search',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/feed',
+    redirectTo: '/tabs/search',
     pathMatch: 'full',
   },
 ];

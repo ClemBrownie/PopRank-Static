@@ -1,6 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Profil</ion-title>
+    <div class="header-content">
+      <ion-img src="/assets/logo.png" alt="PopRank Logo" class="header-logo"></ion-img>
+      <div class="header-title">
+        <h1>PopRank</h1>
+        <span class="page-subtitle">Profil</span>
+      </div>
+    </div>
     <ion-buttons slot="end">
       <ion-button (click)="signOut()" fill="clear">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -20,7 +26,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!-- Profil utilisateur -->
+  <div class="page-container">
+    <!-- Profil utilisateur -->
   <ion-card class="profile-card">
     <ion-card-content>
       <div class="profile-header">
@@ -98,7 +105,9 @@
       </div>
 
       <div *ngIf="!loading && entries.length === 0" class="empty-state">
-        <ion-icon name="film-outline" size="large"></ion-icon>
+        <div class="logo-container">
+          <ion-img src="/assets/logo.png" alt="PopRank Logo" class="logo"></ion-img>
+        </div>
         <p>Aucun film ajouté</p>
         <p>Commencez par rechercher un film !</p>
       </div>
@@ -122,4 +131,28 @@
       </div>
     </ion-card-content>
   </ion-card>
+
+  <!-- Section déconnexion -->
+  <ion-card class="logout-card">
+    <ion-card-content>
+      <div class="logout-section">
+        <div class="logout-info">
+          <ion-icon name="log-out-outline" class="logout-icon"></ion-icon>
+          <div class="logout-text">
+            <h3>Déconnexion</h3>
+            <p>Vous souhaitez vous déconnecter de votre compte ?</p>
+          </div>
+        </div>
+        <ion-button 
+          (click)="signOut()" 
+          fill="outline" 
+          color="danger"
+          class="logout-button">
+          <ion-icon name="log-out" slot="start"></ion-icon>
+          Se déconnecter
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  </div>
 </ion-content>

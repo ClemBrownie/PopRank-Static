@@ -1,2 +1,161 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+// Couleurs personnalisées
+:root {
+  // Couleurs principales
+  --ion-color-primary: #8B5CF6; // Violet moderne
+  --ion-color-primary-rgb: 139, 92, 246;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #7A4FD8;
+  --ion-color-primary-tint: #976DF7;
+
+  // Couleur secondaire (jaune pop-corn)
+  --ion-color-secondary: #FFD700; // Jaune pop-corn
+  --ion-color-secondary-rgb: 255, 215, 0;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #E1BC00;
+  --ion-color-secondary-tint: #FFDA1A;
+
+  // Couleurs d'accent
+  --ion-color-accent: #A855F7; // Violet plus clair
+  --ion-color-accent-rgb: 168, 85, 247;
+  --ion-color-accent-contrast: #ffffff;
+  --ion-color-accent-contrast-rgb: 255, 255, 255;
+  --ion-color-accent-shade: #944BD9;
+  --ion-color-accent-tint: #B166F8;
+
+  // Couleurs de fond
+  --ion-background-color: #F8FAFC;
+  --ion-background-color-rgb: 248, 250, 252;
+  
+  // Couleurs de surface
+  --ion-color-light: #F1F5F9;
+  --ion-color-light-rgb: 241, 245, 249;
+  --ion-color-light-contrast: #1E293B;
+  --ion-color-light-contrast-rgb: 30, 41, 59;
+  --ion-color-light-shade: #D4D8DC;
+  --ion-color-light-tint: #F2F6FA;
+
+  // Couleurs de texte
+  --ion-text-color: #1E293B;
+  --ion-text-color-rgb: 30, 41, 59;
+  --ion-text-color-step-50: #2D3748;
+  --ion-text-color-step-100: #3C4852;
+  --ion-text-color-step-150: #4B5A5C;
+  --ion-text-color-step-200: #5A6C66;
+  --ion-text-color-step-250: #697E70;
+  --ion-text-color-step-300: #78907A;
+  --ion-text-color-step-350: #87A284;
+  --ion-text-color-step-400: #96B48E;
+  --ion-text-color-step-450: #A5C698;
+  --ion-text-color-step-500: #B4D8A2;
+  --ion-text-color-step-550: #C3EAAC;
+  --ion-text-color-step-600: #D2FCB6;
+  --ion-text-color-step-650: #E1FEC0;
+  --ion-text-color-step-700: #F0FFCA;
+  --ion-text-color-step-750: #FFFFD4;
+  --ion-text-color-step-800: #FFFFDE;
+  --ion-text-color-step-850: #FFFFE8;
+  --ion-text-color-step-900: #FFFFF2;
+  --ion-text-color-step-950: #FFFFFC;
+
+  // Variables personnalisées pour le design moderne
+  --app-max-width: 1200px;
+  --app-border-radius: 12px;
+  --app-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --app-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --app-gradient: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-accent) 100%);
+  --app-gradient-secondary: linear-gradient(135deg, var(--ion-color-secondary) 0%, #FFA500 100%);
+}
+
+// Mode sombre
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #0F172A;
+    --ion-background-color-rgb: 15, 23, 42;
+    
+    --ion-text-color: #F8FAFC;
+    --ion-text-color-rgb: 248, 250, 252;
+    
+    --ion-color-light: #1E293B;
+    --ion-color-light-rgb: 30, 41, 59;
+    --ion-color-light-contrast: #F8FAFC;
+    --ion-color-light-contrast-rgb: 248, 250, 252;
+    --ion-color-light-shade: #1A202C;
+    --ion-color-light-tint: #343E4A;
+  }
+}
+
+// Styles pour les composants Ionic
+ion-toolbar {
+  --background: var(--app-gradient);
+  --color: white;
+  --border-width: 0;
+}
+
+ion-tab-bar {
+  --background: white;
+  --border: 1px solid var(--ion-color-light);
+  box-shadow: var(--app-shadow);
+}
+
+ion-tab-button {
+  --color: var(--ion-color-medium);
+  --color-selected: var(--ion-color-primary);
+  transition: all 0.3s ease;
+}
+
+ion-tab-button:hover {
+  --color: var(--ion-color-primary);
+  transform: translateY(-2px);
+}
+
+ion-card {
+  --background: white;
+  border-radius: var(--app-border-radius);
+  box-shadow: var(--app-shadow);
+  margin: 16px;
+  transition: all 0.3s ease;
+}
+
+ion-card:hover {
+  box-shadow: var(--app-shadow-lg);
+  transform: translateY(-2px);
+}
+
+// Classes utilitaires
+.container {
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  background: var(--ion-background-color);
+}
+
+.gradient-bg {
+  background: var(--app-gradient);
+}
+
+.gradient-secondary {
+  background: var(--app-gradient-secondary);
+}
+
+.rounded {
+  border-radius: var(--app-border-radius);
+}
+
+.shadow {
+  box-shadow: var(--app-shadow);
+}
+
+.shadow-lg {
+  box-shadow: var(--app-shadow-lg);
+}

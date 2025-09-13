@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Connexion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Connexion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <div class="auth-container">
+      <h1>PopRank</h1>
+      <p>Suivez vos films préférés et partagez vos avis</p>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="signInWithGoogle()"
+        class="google-button">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+        Se connecter avec Google
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

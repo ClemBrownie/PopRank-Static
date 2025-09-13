@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonImg, IonIcon, IonSpinner, IonButton, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonImg, IonIcon, IonSpinner, IonButton, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
 
@@ -10,7 +10,7 @@ import { TmdbService } from '../../services/tmdb.service';
   templateUrl: './watchlist.page.html',
   styleUrls: ['./watchlist.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonImg, IonIcon, IonSpinner, IonButton, IonRefresher, IonRefresherContent, CommonModule, FormsModule]
+  imports: [IonContent, IonCard, IonCardContent, IonImg, IonIcon, IonSpinner, IonButton, IonRefresher, IonRefresherContent, CommonModule, FormsModule]
 })
 export class WatchlistPage implements OnInit {
   private tmdbService = inject(TmdbService);

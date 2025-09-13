@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, IonButtons, LoadingController, ToastController } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, LoadingController, ToastController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { EntriesService } from '../../services/entries.service';
@@ -14,7 +14,7 @@ import { Entry } from '../../models/entry.model';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, IonButtons, CommonModule, FormsModule]
+  imports: [IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, CommonModule, FormsModule]
 })
 export class ProfilePage implements OnInit {
   private authService = inject(AuthService);

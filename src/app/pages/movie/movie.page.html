@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/search"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ movie?.title || 'Film' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="movie">
+  <div class="movie-header">
+    <ion-img [src]="getBackdropUrl(movie.backdrop_path)" [alt]="movie.title" class="backdrop"></ion-img>
+    <div class="movie-info">
+      <ion-img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="poster"></ion-img>
+      <div class="details">
+        <h1>{{ movie.title }}</h1>
+        <p class="year">{{ movie.release_date | date:'yyyy' }}</p>
+        <p class="genres">{{ getGenreNames() }}</p>
+        <p class="rating">⭐ {{ movie.vote_average | number:'1.1-1' }}/10 ({{ movie.vote_count }} votes)</p>
+        <ion-button expand="block" (click)="openAddEntryModal()" class="add-button">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Marquer comme vu
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Synopsis</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ movie.overview || 'Aucun synopsis disponible.' }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="movie.tagline">
+      <ion-card-content>
+        <p class="tagline">"{{ movie.tagline }}"</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Informations</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Durée</ion-label>
+          <ion-text>{{ movie.runtime }} minutes</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Statut</ion-label>
+          <ion-text>{{ movie.status }}</ion-text>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<!-- Modal pour ajouter une entrée -->
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Marquer comme vu</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">Fermer</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div *ngIf="movie" class="modal-content">
+        <div class="movie-preview">
+          <ion-img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" class="modal-poster"></ion-img>
+          <div>
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.release_date | date:'yyyy' }}</p>
+          </div>
+        </div>
+
+        <ion-item>
+          <ion-label>Note ({{ rating }}/5)</ion-label>
+        </ion-item>
+        <ion-range 
+          min="0" 
+          max="5" 
+          step="1" 
+          [(ngModel)]="rating"
+          color="warning">
+          <ion-icon name="star-outline" slot="start"></ion-icon>
+          <ion-icon name="star" slot="end"></ion-icon>
+        </ion-range>
+
+        <ion-item>
+          <ion-label position="stacked">Avis (optionnel)</ion-label>
+          <ion-textarea 
+            [(ngModel)]="review"
+            placeholder="Partagez votre avis sur ce film..."
+            rows="4">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-button expand="block" (click)="addEntry()" class="confirm-button">
+          Ajouter à ma liste
+        </ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

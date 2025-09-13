@@ -1,0 +1,153 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, IonButtons, LoadingController, ToastController } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { EntriesService } from '../../services/entries.service';
+import { TmdbService } from '../../services/tmdb.service';
+import { User } from '../../models/user.model';
+import { Entry } from '../../models/entry.model';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
+  standalone: true,
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, IonButtons, CommonModule, FormsModule]
+})
+export class ProfilePage implements OnInit {
+  private authService = inject(AuthService);
+  private entriesService = inject(EntriesService);
+  private tmdbService = inject(TmdbService);
+  private router = inject(Router);
+  private loadingController = inject(LoadingController);
+  private toastController = inject(ToastController);
+
+  user: User | null = null;
+  entries: Entry[] = [];
+  loading = true;
+  editingBio = false;
+  bioText = '';
+
+  constructor() { }
+
+  ngOnInit() {
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+      if (user) {
+        this.loadMyEntries();
+        this.bioText = user.bio || '';
+      }
+    });
+  }
+
+  async loadMyEntries() {
+    if (!this.user) return;
+
+    try {
+      this.entriesService.getMyEntries(this.user.uid, 50).subscribe({
+        next: (entries) => {
+          this.entries = entries;
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error('Erreur lors du chargement des entrées:', error);
+          this.entries = [];
+          this.loading = false;
+        }
+      });
+    } catch (error) {
+      console.error('Erreur lors du chargement des entrées:', error);
+      this.entries = [];
+      this.loading = false;
+    }
+  }
+
+  async refreshProfile(event: any) {
+    await this.loadMyEntries();
+    event.target.complete();
+  }
+
+  async signOut() {
+    const loading = await this.loadingController.create({
+      message: 'Déconnexion...'
+    });
+    await loading.present();
+
+    try {
+      await this.authService.signOut();
+      await this.router.navigate(['/auth']);
+      await loading.dismiss();
+    } catch (error) {
+      await loading.dismiss();
+      const toast = await this.toastController.create({
+        message: 'Erreur de déconnexion',
+        duration: 3000,
+        color: 'danger'
+      });
+      await toast.present();
+    }
+  }
+
+  startEditingBio() {
+    this.editingBio = true;
+  }
+
+  async saveBio() {
+    if (!this.user) return;
+
+    const loading = await this.loadingController.create({
+      message: 'Sauvegarde...'
+    });
+    await loading.present();
+
+    try {
+      await this.authService.updateUserProfile({ bio: this.bioText });
+      this.editingBio = false;
+      await loading.dismiss();
+      
+      const toast = await this.toastController.create({
+        message: 'Bio mise à jour !',
+        duration: 2000,
+        color: 'success'
+      });
+      await toast.present();
+    } catch (error) {
+      await loading.dismiss();
+      const toast = await this.toastController.create({
+        message: 'Erreur lors de la sauvegarde',
+        duration: 3000,
+        color: 'danger'
+      });
+      await toast.present();
+    }
+  }
+
+  cancelEditingBio() {
+    this.editingBio = false;
+    this.bioText = this.user?.bio || '';
+  }
+
+  goToMovie(movieId: number) {
+    this.router.navigate(['/movie', movieId]);
+  }
+
+  getImageUrl(posterPath: string | null | undefined): string {
+    return this.tmdbService.getImageUrl(posterPath, 'w342');
+  }
+
+  getStars(rating: number): string {
+    return '⭐'.repeat(rating);
+  }
+
+  getEmptyStars(rating: number): string {
+    return '☆'.repeat(5 - rating);
+  }
+
+  getAverageRating(): number {
+    if (this.entries.length === 0) return 0;
+    const sum = this.entries.reduce((acc, entry) => acc + entry.rating, 0);
+    return sum / this.entries.length;
+  }
+}

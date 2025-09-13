@@ -34,7 +34,7 @@
               <span class="stars">{{ getStars(entry.rating) }}{{ getEmptyStars(entry.rating) }}</span>
             </div>
             <div class="date">
-              {{ entry.watchedAt | date:'dd/MM/yyyy' }}
+              {{ formatDate(entry.watchedAt) }}
             </div>
           </div>
           <p *ngIf="entry.review" class="review">{{ entry.review }}</p>

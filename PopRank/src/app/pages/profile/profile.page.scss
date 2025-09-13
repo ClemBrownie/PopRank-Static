@@ -404,33 +404,6 @@
 .entry-card:nth-child(4) { animation-delay: 0.4s; }
 .entry-card:nth-child(5) { animation-delay: 0.5s; }
 
-/* Amélioration du header */
-ion-header {
-  background: var(--app-gradient);
-  box-shadow: var(--app-shadow);
-}
-
-ion-toolbar {
-  --background: transparent;
-  --color: white;
-  --border-width: 0;
-}
-
-ion-title {
-  font-weight: 700;
-  font-size: 1.5rem;
-}
-
-ion-button {
-  --color: white;
-  --color-hover: var(--ion-color-secondary);
-  transition: all 0.3s ease;
-}
-
-ion-button:hover {
-  --color: var(--ion-color-secondary);
-  transform: scale(1.1);
-}
 
 /* Amélioration du refresher */
 ion-refresher {
@@ -539,42 +512,3 @@ ion-refresher-content {
   }
 }
 
-/* Styles pour le header */
-.header-content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  justify-content: flex-start;
-  padding: 0 16px;
-}
-
-.header-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
-}
-
-.header-title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-}
-
-.header-title h1 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: white;
-  line-height: 1.2;
-}
-
-.page-subtitle {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}

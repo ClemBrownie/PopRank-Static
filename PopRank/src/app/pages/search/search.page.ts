@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, IonButton } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
 import { Movie } from '../../models/movie.model';
@@ -11,7 +11,7 @@ import { Movie } from '../../models/movie.model';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, IonButton, CommonModule, FormsModule]
+  imports: [IonContent, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonIcon, IonSpinner, IonButton, CommonModule, FormsModule]
 })
 export class SearchPage implements OnInit {
   private tmdbService = inject(TmdbService);

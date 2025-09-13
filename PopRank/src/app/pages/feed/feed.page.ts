@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonImg, IonAvatar, IonSpinner, IonRefresher, IonRefresherContent, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonImg, IonAvatar, IonSpinner, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { EntriesService } from '../../services/entries.service';
 import { TmdbService } from '../../services/tmdb.service';
@@ -12,7 +12,7 @@ import { Entry } from '../../models/entry.model';
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonImg, IonAvatar, IonSpinner, IonRefresher, IonRefresherContent, IonIcon, CommonModule, FormsModule]
+  imports: [IonContent, IonCard, IonCardContent, IonImg, IonAvatar, IonSpinner, IonRefresher, IonRefresherContent, CommonModule, FormsModule]
 })
 export class FeedPage implements OnInit {
   private entriesService = inject(EntriesService);

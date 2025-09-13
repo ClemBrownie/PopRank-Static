@@ -21,7 +21,7 @@
         </ion-avatar>
         <div class="profile-info">
           <h2>{{ user.displayName }}</h2>
-          <p class="join-date">Membre depuis {{ user.createdAt | date:'MMMM yyyy' }}</p>
+          <p class="join-date">Membre depuis {{ formatJoinDate(user.createdAt) }}</p>
         </div>
       </div>
       
@@ -106,7 +106,7 @@
                 <h3>{{ entry.title }}</h3>
                 <div class="entry-meta">
                   <span class="rating">{{ getStars(entry.rating) }}{{ getEmptyStars(entry.rating) }}</span>
-                  <span class="date">{{ entry.watchedAt | date:'dd/MM/yyyy' }}</span>
+                  <span class="date">{{ formatDate(entry.watchedAt) }}</span>
                 </div>
                 <p *ngIf="entry.review" class="review">{{ entry.review }}</p>
               </div>

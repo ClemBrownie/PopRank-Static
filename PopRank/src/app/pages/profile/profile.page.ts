@@ -8,6 +8,8 @@ import { EntriesService } from '../../services/entries.service';
 import { TmdbService } from '../../services/tmdb.service';
 import { User } from '../../models/user.model';
 import { Entry } from '../../models/entry.model';
+import { addIcons } from 'ionicons';
+import { createOutline, logOutOutline, logOut } from 'ionicons/icons';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +32,9 @@ export class ProfilePage implements OnInit {
   editingBio = false;
   bioText = '';
 
-  constructor() { }
+  constructor() {
+    addIcons({ createOutline, logOutOutline, logOut });
+  }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => {
@@ -179,5 +183,65 @@ export class ProfilePage implements OnInit {
       console.log('Invalid avatar URL:', this.user.avatarUrl);
       return '/assets/default-avatar.png';
     }
+  }
+
+  formatDate(timestamp: any): string {
+    if (!timestamp) {
+      return '';
+    }
+
+    let date: Date;
+    
+    // Si c'est déjà une Date
+    if (timestamp instanceof Date) {
+      date = timestamp;
+    }
+    // Si c'est un objet Timestamp Firestore
+    else if (timestamp && typeof timestamp === 'object' && timestamp.seconds !== undefined) {
+      date = new Date(timestamp.seconds * 1000 + (timestamp.nanoseconds || 0) / 1000000);
+    }
+    // Si c'est un timestamp en millisecondes
+    else if (typeof timestamp === 'number') {
+      date = new Date(timestamp);
+    }
+    // Si c'est une string de date
+    else if (typeof timestamp === 'string') {
+      date = new Date(timestamp);
+    }
+    else {
+      return '';
+    }
+
+    return date.toLocaleDateString('fr-FR');
+  }
+
+  formatJoinDate(timestamp: any): string {
+    if (!timestamp) {
+      return '';
+    }
+
+    let date: Date;
+    
+    // Si c'est déjà une Date
+    if (timestamp instanceof Date) {
+      date = timestamp;
+    }
+    // Si c'est un objet Timestamp Firestore
+    else if (timestamp && typeof timestamp === 'object' && timestamp.seconds !== undefined) {
+      date = new Date(timestamp.seconds * 1000 + (timestamp.nanoseconds || 0) / 1000000);
+    }
+    // Si c'est un timestamp en millisecondes
+    else if (typeof timestamp === 'number') {
+      date = new Date(timestamp);
+    }
+    // Si c'est une string de date
+    else if (typeof timestamp === 'string') {
+      date = new Date(timestamp);
+    }
+    else {
+      return '';
+    }
+
+    return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
   }
 }

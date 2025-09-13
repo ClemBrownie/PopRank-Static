@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonIcon, LoadingController, ToastController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { addIcons } from 'ionicons';
+import { logoGoogle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-auth',
@@ -18,7 +20,9 @@ export class AuthPage implements OnInit {
   private loadingController = inject(LoadingController);
   private toastController = inject(ToastController);
 
-  constructor() { }
+  constructor() {
+    addIcons({ logoGoogle });
+  }
 
   ngOnInit() {
     // Vérifier si l'utilisateur est déjà connecté

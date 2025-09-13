@@ -35,7 +35,7 @@
             </ion-avatar>
             <div class="user-details">
               <p class="username">{{ entry.userDisplayName || 'Utilisateur' }}</p>
-              <p class="date">{{ entry.watchedAt | date:'dd/MM/yyyy' }}</p>
+              <p class="date">{{ formatDate(entry.watchedAt) }}</p>
             </div>
           </div>
           <div class="rating">

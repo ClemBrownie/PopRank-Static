@@ -94,4 +94,34 @@ export class FeedPage implements OnInit {
       return '/assets/default-avatar.png';
     }
   }
+
+  formatDate(timestamp: any): string {
+    if (!timestamp) {
+      return '';
+    }
+
+    let date: Date;
+    
+    // Si c'est déjà une Date
+    if (timestamp instanceof Date) {
+      date = timestamp;
+    }
+    // Si c'est un objet Timestamp Firestore
+    else if (timestamp && typeof timestamp === 'object' && timestamp.seconds !== undefined) {
+      date = new Date(timestamp.seconds * 1000 + (timestamp.nanoseconds || 0) / 1000000);
+    }
+    // Si c'est un timestamp en millisecondes
+    else if (typeof timestamp === 'number') {
+      date = new Date(timestamp);
+    }
+    // Si c'est une string de date
+    else if (typeof timestamp === 'string') {
+      date = new Date(timestamp);
+    }
+    else {
+      return '';
+    }
+
+    return date.toLocaleDateString('fr-FR');
+  }
 }

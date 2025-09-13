@@ -5,6 +5,8 @@ import { IonContent, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCa
 import { Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
 import { Movie } from '../../models/movie.model';
+import { addIcons } from 'ionicons';
+import { search, refresh } from 'ionicons/icons';
 
 @Component({
   selector: 'app-search',
@@ -22,7 +24,9 @@ export class SearchPage implements OnInit {
   searchQuery = '';
   hasSearched = false;
 
-  constructor() { }
+  constructor() {
+    addIcons({ search, refresh });
+  }
 
   ngOnInit() {
     // Plus besoin de la recherche automatique

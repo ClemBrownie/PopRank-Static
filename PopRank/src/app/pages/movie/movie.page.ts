@@ -8,6 +8,8 @@ import { EntriesService } from '../../services/entries.service';
 import { AuthService } from '../../services/auth.service';
 import { MovieDetails } from '../../models/movie.model';
 import { EntryCreate } from '../../models/entry.model';
+import { addIcons } from 'ionicons';
+import { add, starOutline, star } from 'ionicons/icons';
 
 @Component({
   selector: 'app-movie',
@@ -31,7 +33,9 @@ export class MoviePage implements OnInit {
   review = '';
   isModalOpen = false;
 
-  constructor() { }
+  constructor() {
+    addIcons({ add, starOutline, star });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonImg, IonIcon, IonSpinner, IonButton, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
+import { addIcons } from 'ionicons';
+import { search, bookmark } from 'ionicons/icons';
 
 @Component({
   selector: 'app-watchlist',
@@ -19,7 +21,9 @@ export class WatchlistPage implements OnInit {
   watchlist: any[] = [];
   loading = false;
 
-  constructor() { }
+  constructor() {
+    addIcons({ search, bookmark });
+  }
 
   ngOnInit() {
     this.loadWatchlist();

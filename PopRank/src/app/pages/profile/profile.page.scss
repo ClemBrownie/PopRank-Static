@@ -1,18 +1,35 @@
 /* Styles modernes pour la page de profil */
-.profile-container {
-  padding: 0;
-  max-width: 100%;
-  margin: 0 auto;
+// /* Forcer le conteneur ion-content à respecter la largeur mobile */
+// ion-content {
+//   max-width: 480px !important;
+//   margin: 0 auto !important;
+//   width: 100% !important;
+// }
+
+.page-container {
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+  width: 100% !important;
 }
 
+/* Forcer toutes les cartes à respecter la largeur mobile */
+.page-container ion-card {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 16px 0 !important;
+}
+
+
 .profile-card {
-  margin: 20px auto;
+  margin: 16px 0;
   border-radius: var(--app-border-radius);
   box-shadow: var(--app-shadow);
   overflow: hidden;
   background: white;
   border: 1px solid var(--ion-color-light);
-  max-width: calc(100% - 32px);
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 .profile-header {
@@ -113,9 +130,11 @@
   justify-content: space-around;
   padding: 24px 0;
   background: var(--app-gradient);
-  margin: 20px;
+  margin: 16px 0;
   border-radius: var(--app-border-radius);
   box-shadow: var(--app-shadow);
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 .stat-item {
@@ -210,7 +229,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 20px 20px 20px;
+  padding: 0 0 20px 0;
 }
 
 .entry-card {
@@ -221,6 +240,8 @@
   background: white;
   box-shadow: var(--app-shadow);
   border: 1px solid var(--ion-color-light);
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 .entry-card:hover {
@@ -313,10 +334,6 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .profile-card {
-    margin: 16px;
-  }
-  
   .profile-header {
     padding: 16px 16px 0 16px;
     gap: 16px;
@@ -336,16 +353,11 @@
   }
   
   .stats {
-    margin: 16px;
     padding: 20px 0;
   }
   
   .stat-number {
     font-size: 2rem;
-  }
-  
-  .entries-list {
-    padding: 0 16px 16px 16px;
   }
   
   .entry-content {
@@ -416,11 +428,13 @@ ion-refresher-content {
 
 /* Section déconnexion */
 .logout-card {
-  margin: 20px;
+  margin: 16px 0;
   border-radius: var(--app-border-radius);
   box-shadow: var(--app-shadow);
   border: 1px solid var(--ion-color-light);
   background: white;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 .logout-section {
@@ -491,10 +505,6 @@ ion-refresher-content {
 }
 
 @media (max-width: 480px) {
-  .logout-card {
-    margin: 16px;
-  }
-  
   .logout-section {
     padding: 12px;
   }

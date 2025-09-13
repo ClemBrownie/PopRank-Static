@@ -36,6 +36,10 @@ export class ProfilePage implements OnInit {
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user) {
+        console.log('User data:', user);
+        console.log('Avatar URL:', user.avatarUrl);
+        console.log('Avatar URL type:', typeof user.avatarUrl);
+        console.log('Avatar URL length:', user.avatarUrl?.length);
         this.loadMyEntries();
         this.bioText = user.bio || '';
       }
@@ -149,5 +153,31 @@ export class ProfilePage implements OnInit {
     if (this.entries.length === 0) return 0;
     const sum = this.entries.reduce((acc, entry) => acc + entry.rating, 0);
     return sum / this.entries.length;
+  }
+
+  onImageError(event: any) {
+    console.log('Image error:', event);
+    // Forcer l'affichage de l'image par défaut
+    const img = event.target as HTMLImageElement;
+    img.src = '/assets/default-avatar.png';
+  }
+
+  onImageLoad(event: any) {
+    console.log('Image loaded successfully:', event.target.src);
+  }
+
+  getAvatarUrl(): string {
+    if (!this.user?.avatarUrl) {
+      return '/assets/default-avatar.png';
+    }
+    
+    // Vérifier si l'URL est valide
+    try {
+      new URL(this.user.avatarUrl);
+      return this.user.avatarUrl;
+    } catch (e) {
+      console.log('Invalid avatar URL:', this.user.avatarUrl);
+      return '/assets/default-avatar.png';
+    }
   }
 }

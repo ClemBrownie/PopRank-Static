@@ -68,4 +68,30 @@ export class FeedPage implements OnInit {
   getEmptyStars(rating: number): string {
     return '☆'.repeat(5 - rating);
   }
+
+  onImageError(event: any) {
+    console.log('Image error:', event);
+    // Forcer l'affichage de l'image par défaut
+    const img = event.target as HTMLImageElement;
+    img.src = '/assets/default-avatar.png';
+  }
+
+  onImageLoad(event: any) {
+    console.log('Image loaded successfully:', event.target.src);
+  }
+
+  getAvatarUrl(entry: any): string {
+    if (!entry?.userAvatarUrl) {
+      return '/assets/default-avatar.png';
+    }
+    
+    // Vérifier si l'URL est valide
+    try {
+      new URL(entry.userAvatarUrl);
+      return entry.userAvatarUrl;
+    } catch (e) {
+      console.log('Invalid avatar URL:', entry.userAvatarUrl);
+      return '/assets/default-avatar.png';
+    }
+  }
 }

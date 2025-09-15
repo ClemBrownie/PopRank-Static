@@ -33,31 +33,45 @@
             padding: 15px;
             border-left: 4px solid #d32f2f;
             margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            margin: 20px 0;
+            border-radius: 4px;
         }
         .steps {
-            background-color: #e8f5e8;
+            background-color: #f8f9fa;
             padding: 20px;
             border-radius: 5px;
             margin: 20px 0;
         }
         .contact {
-            background-color: #f8f9fa;
+            background-color: #e8f5e8;
             padding: 20px;
             border-radius: 5px;
             margin-top: 30px;
         }
         .button {
+            display: inline-block;
             background-color: #d32f2f;
             color: white;
             padding: 12px 24px;
-            border: none;
+            text-decoration: none;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
             margin: 10px 0;
+            font-weight: bold;
         }
         .button:hover {
             background-color: #b71c1c;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
         }
     </style>
 </head>
@@ -65,83 +79,126 @@
     <div class="container">
         <h1>🗑️ Suppression de compte - PopRank</h1>
         
+        <p><strong>Développeur :</strong> Brownie (ClemBrownie)</p>
+        <p><strong>Application :</strong> PopRank</p>
+        <p><strong>Dernière mise à jour :</strong> 15 septembre 2025</p>
+        
         <div class="warning">
-            <strong>⚠️ Attention :</strong> La suppression de votre compte est irréversible. Toutes vos données seront définitivement supprimées.
+            <strong>⚠️ Attention :</strong> La suppression de votre compte est irréversible. Toutes vos données personnelles, avis, et listes de films seront définitivement supprimées.
         </div>
 
-        <h2>📋 Données qui seront supprimées</h2>
-        <ul>
-            <li>Votre profil utilisateur</li>
-            <li>Vos avis et notes sur les films</li>
-            <li>Votre liste de films à voir</li>
-            <li>Votre historique d'activité</li>
-            <li>Toutes les données associées à votre compte</li>
-        </ul>
-
-        <h2>🔒 Données qui ne seront PAS supprimées</h2>
-        <ul>
-            <li>Données anonymisées utilisées pour les statistiques globales</li>
-            <li>Logs de sécurité (conservés conformément à la loi)</li>
-        </ul>
-
-        <h2>📱 Comment supprimer votre compte</h2>
+        <h2>📋 Procédure de suppression de compte</h2>
         
         <div class="steps">
-            <h3>Méthode 1 : Depuis l'application</h3>
+            <h3>Étapes à suivre :</h3>
             <ol>
-                <li>Ouvrez l'application PopRank</li>
-                <li>Allez dans "Profil" (icône utilisateur)</li>
-                <li>Appuyez sur "Paramètres"</li>
-                <li>Sélectionnez "Supprimer mon compte"</li>
-                <li>Confirmez la suppression</li>
+                <li><strong>Ouvrez l'application PopRank</strong> sur votre appareil</li>
+                <li><strong>Connectez-vous</strong> avec votre compte Google</li>
+                <li><strong>Allez dans "Profil"</strong> (icône utilisateur en bas à droite)</li>
+                <li><strong>Cliquez sur "Paramètres"</strong> ou "Gérer le compte"</li>
+                <li><strong>Sélectionnez "Supprimer le compte"</strong></li>
+                <li><strong>Confirmez la suppression</strong> en tapant "SUPPRIMER"</li>
+                <li><strong>Déconnectez-vous</strong> de l'application</li>
             </ol>
         </div>
 
-        <div class="steps">
-            <h3>Méthode 2 : Par email</h3>
-            <p>Si vous ne pouvez pas accéder à l'application :</p>
-            <ol>
-                <li>Envoyez un email à : <strong>privacy@poprank.app</strong></li>
-                <li>Objet : "Suppression de compte"</li>
-                <li>Indiquez votre adresse email associée au compte</li>
-                <li>Nous traiterons votre demande sous 48h</li>
-            </ol>
+        <h2>📧 Demande de suppression par email</h2>
+        
+        <p>Si vous ne parvenez pas à supprimer votre compte via l'application, vous pouvez nous contacter directement :</p>
+        
+        <div class="contact">
+            <h3>Contact pour la suppression de compte :</h3>
+            <ul>
+                <li><strong>Email :</strong> <a href="mailto:account-deletion@poprank.app">account-deletion@poprank.app</a></li>
+                <li><strong>Sujet :</strong> Demande de suppression de compte PopRank</li>
+                <li><strong>Délai de traitement :</strong> 7 jours ouvrés maximum</li>
+            </ul>
+            
+            <p><strong>Informations à inclure dans votre email :</strong></p>
+            <ul>
+                <li>Votre nom complet</li>
+                <li>Adresse email associée au compte</li>
+                <li>ID utilisateur (si disponible)</li>
+                <li>Confirmation que vous souhaitez supprimer définitivement votre compte</li>
+            </ul>
         </div>
 
-        <h2>⏱️ Délai de suppression</h2>
-        <p>Votre compte sera supprimé dans les <strong>30 jours</strong> suivant votre demande. Pendant cette période, vous pouvez annuler la suppression en nous contactant.</p>
-
-        <h2>🔄 Récupération de données</h2>
-        <p>Avant de supprimer votre compte, vous pouvez :</p>
+        <h2>🗂️ Données supprimées</h2>
+        
+        <p>Lors de la suppression de votre compte, les données suivantes seront <strong>définitivement supprimées</strong> :</p>
+        
+        <h3>Données personnelles :</h3>
         <ul>
-            <li>Exporter vos données (fonctionnalité à venir)</li>
-            <li>Sauvegarder vos listes de films</li>
-            <li>Noter vos avis importants</li>
+            <li>Nom d'utilisateur et email</li>
+            <li>Photo de profil</li>
+            <li>Informations de profil personnalisées</li>
         </ul>
+        
+        <h3>Données d'utilisation :</h3>
+        <ul>
+            <li>Liste de films à voir (watchlist)</li>
+            <li>Films déjà vus</li>
+            <li>Avis et notes sur les films</li>
+            <li>Historique de recherche</li>
+            <li>Préférences utilisateur</li>
+        </ul>
+        
+        <h3>Données techniques :</h3>
+        <ul>
+            <li>Logs d'activité</li>
+            <li>Données de session</li>
+            <li>Préférences de l'application</li>
+        </ul>
+
+        <h2>⏰ Données conservées</h2>
+        
+        <p>Certaines données peuvent être conservées pour des raisons légales ou techniques :</p>
+        
+        <ul>
+            <li><strong>Logs de sécurité</strong> : 12 mois maximum (anonymisés)</li>
+            <li><strong>Données de facturation</strong> : 7 ans (si applicable)</li>
+            <li><strong>Sauvegardes système</strong> : 30 jours maximum</li>
+        </ul>
+
+        <h2>🔄 Récupération de compte</h2>
+        
+        <div class="info">
+            <strong>ℹ️ Important :</strong> Une fois votre compte supprimé, il ne peut pas être récupéré. Vous devrez créer un nouveau compte si vous souhaitez utiliser PopRank à nouveau.
+        </div>
+
+        <h2>📱 Suppression de l'application</h2>
+        
+        <p>Pour supprimer complètement PopRank de votre appareil :</p>
+        <ol>
+            <li>Supprimez votre compte (voir procédure ci-dessus)</li>
+            <li>Désinstallez l'application depuis votre appareil</li>
+            <li>Supprimez les données de l'application dans les paramètres</li>
+        </ol>
 
         <h2>❓ Questions fréquentes</h2>
         
-        <h3>Puis-je récupérer mon compte après suppression ?</h3>
-        <p>Non, la suppression est définitive. Vous devrez créer un nouveau compte.</p>
-
-        <h3>Mes avis seront-ils supprimés ?</h3>
-        <p>Oui, tous vos avis et notes seront définitivement supprimés.</p>
-
-        <h3>Puis-je utiliser le même email pour un nouveau compte ?</h3>
-        <p>Oui, après 30 jours, vous pourrez créer un nouveau compte avec le même email.</p>
+        <h3>Puis-je récupérer mes données après suppression ?</h3>
+        <p>Non, la suppression est définitive. Nous vous recommandons d'exporter vos données importantes avant de supprimer votre compte.</p>
+        
+        <h3>Combien de temps prend la suppression ?</h3>
+        <p>La suppression via l'application est immédiate. Les demandes par email sont traitées sous 7 jours ouvrés.</p>
+        
+        <h3>Mes avis sur les films seront-ils supprimés ?</h3>
+        <p>Oui, tous vos avis et notes seront définitivement supprimés avec votre compte.</p>
 
         <div class="contact">
-            <h2>📧 Contact</h2>
+            <h2>📞 Support</h2>
             <p>Pour toute question concernant la suppression de compte :</p>
             <ul>
-                <li><strong>Email :</strong> privacy@poprank.app</li>
-                <li><strong>Support :</strong> support@poprank.app</li>
+                <li><strong>Email :</strong> <a href="mailto:support@poprank.app">support@poprank.app</a></li>
+                <li><strong>Développeur :</strong> ClemBrownie</li>
+                <li><strong>Application :</strong> PopRank</li>
             </ul>
         </div>
 
         <hr>
         <p style="text-align: center; color: #666; font-size: 14px;">
-            © 2025 PopRank. Tous droits réservés.
+            © 2025 PopRank par Brownie. Tous droits réservés.
         </p>
     </div>
 </body>

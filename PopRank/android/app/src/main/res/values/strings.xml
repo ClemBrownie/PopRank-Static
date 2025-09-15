@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PopRank</string>
+    <string name="title_activity_main">PopRank</string>
+    <string name="package_name">com.poprank.app</string>
+    <string name="custom_url_scheme">com.poprank.app</string>
+</resources>

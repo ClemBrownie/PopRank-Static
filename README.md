@@ -102,3 +102,20 @@ src/
 ## Licence
 
 MIT
+
+
+
+
+Pour déployer sur Android 
+
+# Reconstruire l'application
+cd /home/etud/Documents/Perso/PopRank-Static/PopRank
+npm run build
+npx cap sync
+
+# Reconstruire l'APK
+cd android
+./gradlew assembleDebug
+
+# Réinstaller sur l'émulateur
+/home/etud/Android/Sdk/platform-tools/adb install -r app/build/outputs/apk/debug/app-debug.apk

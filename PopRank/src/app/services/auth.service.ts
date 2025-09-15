@@ -1,9 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, GoogleAuthProvider, signInWithPopup, signOut, User as FirebaseUser } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, User as FirebaseUser } from '@angular/fire/auth';
 import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { User, UserCreate } from '../models/user.model';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +30,41 @@ export class AuthService {
 
   async signInWithGoogle(): Promise<User> {
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(this.auth, provider);
-      return this.getOrCreateUser(result.user);
+      if (Capacitor.isNativePlatform()) {
+        // Utiliser le plugin Capacitor pour mobile
+        console.log('Tentative de connexion Google sur mobile...');
+        const result = await GoogleAuth.signIn();
+        console.log('Résultat Google Auth:', result);
+        
+        if (!result.authentication?.idToken) {
+          throw new Error('Aucun token d\'authentification reçu de Google');
+        }
+        
+        const credential = GoogleAuthProvider.credential(result.authentication.idToken);
+        const firebaseResult = await signInWithCredential(this.auth, credential);
+        console.log('Connexion Firebase réussie:', firebaseResult.user.uid);
+        return this.getOrCreateUser(firebaseResult.user);
+      } else {
+        // Utiliser signInWithPopup pour le web
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(this.auth, provider);
+        return this.getOrCreateUser(result.user);
+      }
     } catch (error: any) {
       console.error('Erreur de connexion Google:', error);
-      throw new Error('Échec de la connexion Google. Veuillez réessayer.');
+      console.error('Détails de l\'erreur:', {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      });
+      throw new Error(`Échec de la connexion Google: ${error.message || 'Erreur inconnue'}`);
     }
   }
 
   async signOut(): Promise<void> {
+    if (Capacitor.isNativePlatform()) {
+      await GoogleAuth.signOut();
+    }
     await signOut(this.auth);
   }
 

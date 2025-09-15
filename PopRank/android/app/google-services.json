@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "177488329798",
+    "project_id": "poprank-88860",
+    "storage_bucket": "poprank-88860.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177488329798:android:81ab44d087053e66d79e47",
+        "android_client_info": {
+          "package_name": "com.poprank.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177488329798-6n75h66b3q203mr9dq4s1vr5du7beh04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.poprank.app",
+            "certificate_hash": "874227aeb569cb5a3c38f81eb64090740e89f597"
+          }
+        },
+        {
+          "client_id": "177488329798-s0hqnhqot580fgjcvtjf1t860qmbeopp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNNxfe4hBHNHb-yyn-usrgqc0B5AE5KHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177488329798-s0hqnhqot580fgjcvtjf1t860qmbeopp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

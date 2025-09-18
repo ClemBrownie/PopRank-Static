@@ -67,5 +67,10 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.8.0"
   },
-  "description": "PopRank - Suivez vos films préférés et partagez vos avis"
+  "description": "PopRank - Suivez vos films préférés et partagez vos avis",
+  "overrides": {
+    "@codetrix-studio/capacitor-google-auth": {
+      "@capacitor/core": "7.4.3"
+    }
+  }
 }

@@ -1,20 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonButton, IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText, IonItem, IonLabel, IonTextarea, IonRange, IonModal, IonButtons, IonBackButton, LoadingController, ToastController } from '@ionic/angular/standalone';
+import { IonContent, IonImg, IonButton, IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText, IonItem, IonLabel, IonTextarea, IonRange, IonModal, LoadingController, ToastController } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
 import { EntriesService } from '../../services/entries.service';
 import { AuthService } from '../../services/auth.service';
 import { MovieDetails } from '../../models/movie.model';
 import { EntryCreate } from '../../models/entry.model';
+import { addIcons } from 'ionicons';
+import { add, starOutline, star } from 'ionicons/icons';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.page.html',
   styleUrls: ['./movie.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonButton, IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText, IonItem, IonLabel, IonTextarea, IonRange, IonModal, IonButtons, IonBackButton, CommonModule, FormsModule]
+  imports: [IonContent, IonImg, IonButton, IonIcon, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText, IonItem, IonLabel, IonTextarea, IonRange, IonModal, CommonModule, FormsModule]
 })
 export class MoviePage implements OnInit {
   private route = inject(ActivatedRoute);
@@ -31,7 +33,9 @@ export class MoviePage implements OnInit {
   review = '';
   isModalOpen = false;
 
-  constructor() { }
+  constructor() {
+    addIcons({ add, starOutline, star });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

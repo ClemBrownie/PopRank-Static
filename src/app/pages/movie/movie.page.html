@@ -1,12 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/search"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ movie?.title || 'Film' }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" *ngIf="movie">
   <div class="movie-header">
     <ion-img [src]="getBackdropUrl(movie.backdrop_path)" [alt]="movie.title" class="backdrop"></ion-img>
@@ -62,14 +53,6 @@
 <!-- Modal pour ajouter une entrée -->
 <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
   <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Marquer comme vu</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="closeModal()">Fermer</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
     <ion-content class="ion-padding">
       <div *ngIf="movie" class="modal-content">
         <div class="movie-preview">

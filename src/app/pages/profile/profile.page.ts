@@ -1,20 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, IonButtons, LoadingController, ToastController } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, LoadingController, ToastController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { EntriesService } from '../../services/entries.service';
 import { TmdbService } from '../../services/tmdb.service';
 import { User } from '../../models/user.model';
 import { Entry } from '../../models/entry.model';
+import { addIcons } from 'ionicons';
+import { createOutline, logOutOutline, logOut } from 'ionicons/icons';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, IonButtons, CommonModule, FormsModule]
+  imports: [IonContent, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonImg, IonAvatar, IonButton, IonIcon, IonTextarea, IonItem, IonLabel, IonText, IonSpinner, IonRefresher, IonRefresherContent, CommonModule, FormsModule]
 })
 export class ProfilePage implements OnInit {
   private authService = inject(AuthService);
@@ -30,12 +32,18 @@ export class ProfilePage implements OnInit {
   editingBio = false;
   bioText = '';
 
-  constructor() { }
+  constructor() {
+    addIcons({ createOutline, logOutOutline, logOut });
+  }
 
   ngOnInit() {
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user) {
+        console.log('User data:', user);
+        console.log('Avatar URL:', user.avatarUrl);
+        console.log('Avatar URL type:', typeof user.avatarUrl);
+        console.log('Avatar URL length:', user.avatarUrl?.length);
         this.loadMyEntries();
         this.bioText = user.bio || '';
       }
@@ -83,7 +91,7 @@ export class ProfilePage implements OnInit {
       await loading.dismiss();
       const toast = await this.toastController.create({
         message: 'Erreur de déconnexion',
-        duration: 3000,
+        duration: 30000,
         color: 'danger'
       });
       await toast.present();
@@ -149,5 +157,91 @@ export class ProfilePage implements OnInit {
     if (this.entries.length === 0) return 0;
     const sum = this.entries.reduce((acc, entry) => acc + entry.rating, 0);
     return sum / this.entries.length;
+  }
+
+  onImageError(event: any) {
+    console.log('Image error:', event);
+    // Forcer l'affichage de l'image par défaut
+    const img = event.target as HTMLImageElement;
+    img.src = '/assets/default-avatar.png';
+  }
+
+  onImageLoad(event: any) {
+    console.log('Image loaded successfully:', event.target.src);
+  }
+
+  getAvatarUrl(): string {
+    if (!this.user?.avatarUrl) {
+      return '/assets/default-avatar.png';
+    }
+    
+    // Vérifier si l'URL est valide
+    try {
+      new URL(this.user.avatarUrl);
+      return this.user.avatarUrl;
+    } catch (e) {
+      console.log('Invalid avatar URL:', this.user.avatarUrl);
+      return '/assets/default-avatar.png';
+    }
+  }
+
+  formatDate(timestamp: any): string {
+    if (!timestamp) {
+      return '';
+    }
+
+    let date: Date;
+    
+    // Si c'est déjà une Date
+    if (timestamp instanceof Date) {
+      date = timestamp;
+    }
+    // Si c'est un objet Timestamp Firestore
+    else if (timestamp && typeof timestamp === 'object' && timestamp.seconds !== undefined) {
+      date = new Date(timestamp.seconds * 1000 + (timestamp.nanoseconds || 0) / 1000000);
+    }
+    // Si c'est un timestamp en millisecondes
+    else if (typeof timestamp === 'number') {
+      date = new Date(timestamp);
+    }
+    // Si c'est une string de date
+    else if (typeof timestamp === 'string') {
+      date = new Date(timestamp);
+    }
+    else {
+      return '';
+    }
+
+    return date.toLocaleDateString('fr-FR');
+  }
+
+  formatJoinDate(timestamp: any): string {
+    if (!timestamp) {
+      return '';
+    }
+
+    let date: Date;
+    
+    // Si c'est déjà une Date
+    if (timestamp instanceof Date) {
+      date = timestamp;
+    }
+    // Si c'est un objet Timestamp Firestore
+    else if (timestamp && typeof timestamp === 'object' && timestamp.seconds !== undefined) {
+      date = new Date(timestamp.seconds * 1000 + (timestamp.nanoseconds || 0) / 1000000);
+    }
+    // Si c'est un timestamp en millisecondes
+    else if (typeof timestamp === 'number') {
+      date = new Date(timestamp);
+    }
+    // Si c'est une string de date
+    else if (typeof timestamp === 'string') {
+      date = new Date(timestamp);
+    }
+    else {
+      return '';
+    }
+
+    return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
   }
 }

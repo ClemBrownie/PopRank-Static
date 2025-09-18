@@ -8,6 +8,9 @@ export interface Entry {
   review?: string;
   watchedAt: Date;
   createdAt: Date;
+  // Informations utilisateur
+  userDisplayName?: string;
+  userAvatarUrl?: string;
 }
 
 export interface EntryCreate {

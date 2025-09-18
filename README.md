@@ -95,9 +95,94 @@ src/
 2. Déployer le dossier `www/` sur Vercel
 
 ### Mobile
+
+#### Compilation Android (AAB)
+1. **Préparation du projet**
+   ```bash
+   # Synchroniser les changements avec Capacitor
+   npm run cap:sync
+   
+   # Compiler l'application web
+   npm run build
+   ```
+
+2. **Configuration de la version**
+   - Modifier `android/app/build.gradle` :
+   ```gradle
+   android {
+       defaultConfig {
+           versionCode 3        // Incrémenter à chaque release
+           versionName "1.1.1"  // Version visible par l'utilisateur
+       }
+   }
+   ```
+
+3. **Compilation Android**
+   ```bash
+   # Aller dans le dossier Android
+   cd android
+   
+   # Nettoyer et compiler (APK + AAB)
+   ./gradlew clean assembleRelease bundleRelease
+   ```
+
+4. **Fichiers générés**
+   - **AAB** : `android/app/build/outputs/bundle/release/app-release.aab`
+   - **APK** : `android/app/build/outputs/apk/release/app-release.apk`
+
+5. **Vérification**
+   ```bash
+   # Vérifier la version
+   cat android/app/build/outputs/apk/release/output-metadata.json | grep -E "(versionCode|versionName)"
+   
+   # Vérifier la taille
+   ls -lh android/app/build/outputs/bundle/release/app-release.aab
+   ```
+
+6. **Upload sur Google Play Console**
+   - Aller sur [Google Play Console](https://play.google.com/console)
+   - Sélectionner votre app PopRank
+   - **Production** → **Créer une nouvelle version**
+   - Uploader le fichier `app-release.aab`
+   - Remplir les notes de version (exemple ci-dessous)
+   - Publier
+
+#### Notes de version (exemple)
+```
+Version 1.1.1 - Corrections et améliorations
+
+🔧 Corrections
+- Résolution des conflits de dépendances
+- Amélioration de la stabilité générale
+- Correction des problèmes de compilation
+
+✨ Améliorations
+- Ajout de l'indicateur de version dans le profil
+- Optimisation des performances
+- Interface utilisateur améliorée
+
+📱 Nouveautés
+- Meilleure gestion des erreurs
+- Expérience utilisateur plus fluide
+```
+
+#### Bonnes pratiques
+- **versionCode** : Toujours incrémenter (1, 2, 3, ...)
+- **versionName** : Format sémantique (1.0.0, 1.1.0, 1.1.1)
+- **Test** : Toujours tester l'APK avant de publier l'AAB
+- **Notes** : Décrire clairement les changements pour les utilisateurs
+
+#### Compilation iOS
 1. Build: `npm run build`
 2. Sync: `npm run cap:sync`
-3. Ouvrir dans Xcode/Android Studio: `npm run ios` / `npm run android`
+3. Ouvrir dans Xcode: `npm run ios`
+4. Compiler et uploader via Xcode
+
+#### Test local
+1. Build: `npm run build`
+2. Sync: `npm run cap:sync`
+3. Ouvrir dans Android Studio: `npm run android`
+4. Lancer sur émulateur ou appareil connecté
 
 ## Licence
 

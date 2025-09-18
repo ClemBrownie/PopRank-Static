@@ -248,6 +248,50 @@
   padding: 0 0 20px 0;
 }
 
+// Section version
+.version-card {
+  margin: 16px 0;
+  border-radius: 16px;
+  box-shadow: var(--app-shadow-sm);
+  background: var(--ion-color-light);
+  border: 1px solid var(--ion-color-light-shade);
+}
+
+.version-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.version-icon {
+  font-size: 1.5rem;
+  color: var(--ion-color-primary);
+  flex-shrink: 0;
+}
+
+.version-text {
+  flex: 1;
+}
+
+.version-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.version-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ion-color-medium);
+  font-family: 'Courier New', monospace;
+  background: var(--ion-color-light-tint);
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
 .entry-card {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

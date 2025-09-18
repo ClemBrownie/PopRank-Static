@@ -9,7 +9,8 @@ import { TmdbService } from '../../services/tmdb.service';
 import { User } from '../../models/user.model';
 import { Entry } from '../../models/entry.model';
 import { addIcons } from 'ionicons';
-import { createOutline, logOutOutline, logOut } from 'ionicons/icons';
+import { createOutline, logOutOutline, logOut, informationCircleOutline } from 'ionicons/icons';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-profile',
@@ -31,12 +32,22 @@ export class ProfilePage implements OnInit {
   loading = true;
   editingBio = false;
   bioText = '';
+  appVersion = '1.1.1';
 
   constructor() {
-    addIcons({ createOutline, logOutOutline, logOut });
+    addIcons({ createOutline, logOutOutline, logOut, informationCircleOutline });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    // Récupérer la version de l'app
+    try {
+      const info = await App.getInfo();
+      this.appVersion = info.version;
+    } catch (error) {
+      console.log('Impossible de récupérer la version:', error);
+      // Garder la version par défaut
+    }
+
     this.authService.user$.subscribe(user => {
       this.user = user;
       if (user) {

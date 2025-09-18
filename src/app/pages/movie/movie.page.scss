@@ -1,7 +1,9 @@
+/* Styles modernes pour la page de détails du film */
 .movie-header {
   position: relative;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
+  border-radius: 0 0 var(--app-border-radius) var(--app-border-radius);
 }
 
 .backdrop {
@@ -11,102 +13,340 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.3);
+  transition: all 0.3s ease;
+}
+
+.movie-header:hover .backdrop {
   filter: brightness(0.4);
+  transform: scale(1.02);
 }
 
 .movie-info {
   position: relative;
   z-index: 2;
   display: flex;
-  padding: 20px;
-  gap: 20px;
+  padding: 40px 20px;
+  gap: 24px;
   height: 100%;
   align-items: flex-end;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
 }
 
 .poster {
-  width: 120px;
-  height: 180px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 160px;
+  height: 240px;
+  border-radius: var(--app-border-radius);
+  box-shadow: var(--app-shadow-lg);
   flex-shrink: 0;
+  transition: all 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.movie-header:hover .poster {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .details {
   flex: 1;
   color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .details h1 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin: 0 0 8px 0;
-  line-height: 1.2;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+  background: var(--app-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .year, .genres {
-  margin: 4px 0;
-  opacity: 0.9;
-  font-size: 0.9rem;
+  margin: 6px 0;
+  opacity: 0.95;
+  font-size: 1rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-right: 8px;
+  backdrop-filter: blur(10px);
 }
 
 .rating {
-  margin: 8px 0 16px 0;
-  font-size: 0.9rem;
-  color: #ffd700;
+  margin: 12px 0 20px 0;
+  font-size: 1.1rem;
+  color: var(--ion-color-secondary);
+  font-weight: 600;
+  background: rgba(255, 215, 0, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
 }
 
 .add-button {
-  --background: var(--ion-color-primary);
+  --background: var(--app-gradient);
   --color: white;
-  margin-top: 12px;
+  --border-radius: var(--app-border-radius);
+  --box-shadow: var(--app-shadow);
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.add-button:hover {
+  --box-shadow: var(--app-shadow-lg);
+  transform: translateY(-2px);
 }
 
 .movie-content {
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.movie-content ion-card {
+  margin: 20px;
+  border-radius: var(--app-border-radius);
+  box-shadow: var(--app-shadow);
+  border: 1px solid var(--ion-color-light);
+  overflow: hidden;
+}
+
+.movie-content ion-card-header {
+  background: var(--app-gradient);
+  color: white;
   padding: 20px;
+}
+
+.movie-content ion-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.movie-content ion-card-content {
+  padding: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ion-text-color);
 }
 
 .tagline {
   font-style: italic;
   text-align: center;
-  font-size: 1.1rem;
-  color: var(--ion-color-medium);
+  font-size: 1.2rem;
+  color: var(--ion-color-primary);
   margin: 0;
+  font-weight: 600;
+  background: var(--ion-color-light);
+  padding: 20px;
+  border-radius: var(--app-border-radius);
+  border-left: 4px solid var(--ion-color-primary);
 }
 
+.movie-content ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-border-width: 0;
+  --border-width: 0;
+  --background: transparent;
+  margin-bottom: 12px;
+}
+
+.movie-content ion-label {
+  font-weight: 600;
+  color: var(--ion-text-color);
+  font-size: 1rem;
+}
+
+.movie-content ion-text {
+  color: var(--ion-color-medium);
+  font-weight: 500;
+}
+
+/* Modal styles */
 .modal-content {
-  padding: 16px 0;
+  padding: 20px 0;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .movie-preview {
   display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
-  padding: 16px;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 20px;
   background: var(--ion-color-light);
-  border-radius: 8px;
+  border-radius: var(--app-border-radius);
+  border: 1px solid var(--ion-color-light);
+  transition: all 0.3s ease;
+}
+
+.movie-preview:hover {
+  box-shadow: var(--app-shadow);
+  transform: translateY(-2px);
 }
 
 .modal-poster {
-  width: 80px;
-  height: 120px;
-  border-radius: 4px;
+  width: 100px;
+  height: 150px;
+  border-radius: var(--app-border-radius);
   object-fit: cover;
+  box-shadow: var(--app-shadow);
 }
 
 .movie-preview h3 {
   margin: 0 0 8px 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ion-text-color);
 }
 
 .movie-preview p {
   margin: 0;
   color: var(--ion-color-medium);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .confirm-button {
-  margin-top: 24px;
-  --background: var(--ion-color-primary);
+  margin-top: 32px;
+  --background: var(--app-gradient);
   --color: white;
+  --border-radius: var(--app-border-radius);
+  --box-shadow: var(--app-shadow);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 16px;
+  transition: all 0.3s ease;
 }
+
+.confirm-button:hover {
+  --box-shadow: var(--app-shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Range slider styles */
+ion-range {
+  --bar-background: var(--ion-color-light);
+  --bar-background-active: var(--ion-color-secondary);
+  --bar-height: 8px;
+  --bar-border-radius: 4px;
+  --knob-background: var(--ion-color-secondary);
+  --knob-size: 24px;
+  --pin-background: var(--ion-color-primary);
+  --pin-color: white;
+}
+
+/* Textarea styles */
+ion-textarea {
+  --background: var(--ion-color-light);
+  --border-radius: var(--app-border-radius);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border: 1px solid var(--ion-color-light);
+  transition: all 0.3s ease;
+}
+
+ion-textarea:focus-within {
+  --background: white;
+  border-color: var(--ion-color-primary);
+  box-shadow: var(--app-shadow);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .movie-header {
+    height: 400px;
+  }
+  
+  .movie-info {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .poster {
+    width: 120px;
+    height: 180px;
+  }
+  
+  .details h1 {
+    font-size: 2rem;
+  }
+  
+  .movie-content {
+    padding: 0;
+  }
+  
+  .movie-content ion-card {
+    margin: 16px;
+  }
+  
+  .modal-content {
+    padding: 16px 0;
+  }
+  
+  .movie-preview {
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .modal-poster {
+    width: 80px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .poster {
+    width: 100px;
+    height: 150px;
+  }
+  
+  .details h1 {
+    font-size: 1.5rem;
+  }
+  
+  .year, .genres {
+    font-size: 0.9rem;
+  }
+  
+  .rating {
+    font-size: 1rem;
+  }
+  
+  .movie-preview {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .modal-poster {
+    align-self: center;
+  }
+}
+

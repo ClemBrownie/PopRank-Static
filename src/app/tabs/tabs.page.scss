@@ -1,1 +1,195 @@
+/* Styles modernes pour les onglets en bas */
+ion-tabs {
+  --background: white;
+}
 
+ion-tab-bar {
+  --background: white;
+  --border: 1px solid var(--ion-color-light);
+  --box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  --padding-top: 4px;
+  --padding-bottom: 6px;
+  --padding-start: 0;
+  --padding-end: 0;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  min-height: 60px;
+}
+
+ion-tab-button {
+  --color: var(--ion-color-medium);
+  --color-selected: var(--ion-color-primary);
+  --background: transparent;
+  --background-selected: transparent;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 8px 4px;
+}
+
+ion-tab-button:hover {
+  --color: var(--ion-color-primary);
+  transform: translateY(-2px);
+}
+
+
+ion-tab-button.tab-selected {
+  --color: var(--ion-color-primary);
+  transform: translateY(-2px);
+}
+
+ion-tab-button.tab-selected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3px;
+  background: var(--ion-color-primary);
+  border-radius: 0 0 3px 3px;
+}
+
+
+ion-tab-button ion-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+ion-tab-button.tab-selected ion-label {
+  font-weight: 700;
+}
+
+/* Animation pour le changement d'onglet */
+ion-tab-button {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+ion-tab-button:nth-child(1) { animation-delay: 0.1s; }
+ion-tab-button:nth-child(2) { animation-delay: 0.2s; }
+ion-tab-button:nth-child(3) { animation-delay: 0.3s; }
+ion-tab-button:nth-child(4) { animation-delay: 0.4s; }
+ion-tab-button:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  ion-tab-bar {
+    --padding-top: 4px;
+    --padding-bottom: 6px;
+    min-height: 60px;
+  }
+  
+  ion-tab-button {
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    min-height: 50px;
+    padding: 8px 4px;
+    justify-content: center;
+  }
+  
+  ion-tab-button ion-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  ion-tab-bar {
+    --padding-top: 4px;
+    --padding-bottom: 8px;
+    min-height: 55px;
+  }
+  
+  ion-tab-button {
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    min-height: 45px;
+    padding: 6px 4px;
+    justify-content: center;
+  }
+  
+  ion-tab-button ion-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* Support pour les appareils avec encoche */
+@supports (padding: max(0px)) {
+  ion-tab-bar {
+    --padding-bottom: max(8px, env(safe-area-inset-bottom));
+    min-height: max(60px, calc(60px + env(safe-area-inset-bottom)));
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  ion-tab-bar {
+    --background: var(--ion-color-dark);
+    --border: 1px solid var(--ion-color-dark-shade);
+    background: rgba(var(--ion-color-dark-rgb), 0.95);
+  }
+  
+  ion-tab-button {
+    --color: var(--ion-color-medium);
+    --color-selected: var(--ion-color-primary);
+  }
+}
+
+/* Amélioration de l'accessibilité */
+ion-tab-button:focus {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Effet de pression sur mobile */
+ion-tab-button:active {
+  transform: scale(0.95);
+}
+
+/* Indicateur de notification (pour usage futur) */
+ion-tab-button .notification-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: var(--ion-color-danger);
+  border-radius: 50%;
+  border: 2px solid white;
+}

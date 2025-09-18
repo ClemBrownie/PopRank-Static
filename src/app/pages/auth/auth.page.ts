@@ -1,16 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, LoadingController, ToastController } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, LoadingController, ToastController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { addIcons } from 'ionicons';
+import { logoGoogle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, CommonModule, FormsModule]
+  imports: [IonContent, IonButton, IonIcon, CommonModule, FormsModule]
 })
 export class AuthPage implements OnInit {
   private authService = inject(AuthService);
@@ -18,7 +20,9 @@ export class AuthPage implements OnInit {
   private loadingController = inject(LoadingController);
   private toastController = inject(ToastController);
 
-  constructor() { }
+  constructor() {
+    addIcons({ logoGoogle });
+  }
 
   ngOnInit() {
     // Vérifier si l'utilisateur est déjà connecté

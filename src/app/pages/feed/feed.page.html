@@ -1,27 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Feed</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Feed</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <ion-refresher slot="fixed" (ionRefresh)="refreshFeed($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div *ngIf="loading" class="loading-container">
+  <div class="page-container">
+    <div *ngIf="loading" class="loading-container">
     <ion-spinner></ion-spinner>
     <p>Chargement du feed...</p>
   </div>
 
   <div *ngIf="!loading && entries.length === 0" class="empty-state">
-    <ion-icon name="film" size="large"></ion-icon>
+    <div class="logo-container">
+      <ion-img src="/assets/logo.png" alt="PopRank Logo" class="logo"></ion-img>
+    </div>
     <p>Aucune activité récente</p>
     <p>Soyez le premier à partager un film !</p>
   </div>
@@ -32,11 +24,18 @@
         <div class="entry-header">
           <div class="user-info">
             <ion-avatar>
-              <ion-img src="/assets/default-avatar.png" alt="Avatar"></ion-img>
+              <img 
+                [src]="getAvatarUrl(entry)" 
+                [alt]="entry.userDisplayName || 'Utilisateur'"
+                (error)="onImageError($event)"
+                (load)="onImageLoad($event)"
+                class="avatar-image"
+                loading="lazy"
+                crossorigin="anonymous">
             </ion-avatar>
             <div class="user-details">
-              <p class="username">Utilisateur</p>
-              <p class="date">{{ entry.watchedAt | date:'dd/MM/yyyy' }}</p>
+              <p class="username">{{ entry.userDisplayName || 'Utilisateur' }}</p>
+              <p class="date">{{ formatDate(entry.watchedAt) }}</p>
             </div>
           </div>
           <div class="rating">
@@ -53,5 +52,6 @@
         </div>
       </ion-card-content>
     </ion-card>
+    </div>
   </div>
 </ion-content>

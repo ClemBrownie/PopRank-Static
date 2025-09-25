@@ -46,7 +46,7 @@ export class AuthPage implements OnInit {
     } catch (error) {
       await loading.dismiss();
       const toast = await this.toastController.create({
-        message: 'Erreur de connexion',
+        message: 'Erreur de connexion' + error,
         duration: 30000,
         color: 'danger'
       });

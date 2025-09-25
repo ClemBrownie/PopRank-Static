@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "177488329798-055gppe79kkg2rfmah41cq7ke256je89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.poprank.app",
+            "certificate_hash": "fad02842f451c9f1f90fcfeb0e86f25a3527d01c"
+          }
+        },
+        {
           "client_id": "177488329798-6n75h66b3q203mr9dq4s1vr5du7beh04.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

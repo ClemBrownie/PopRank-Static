@@ -25,11 +25,6 @@
       <p>Recherche en cours...</p>
     </div>
 
-    <div *ngIf="hasSearched && !loading && movies.length > 0" class="search-results-header">
-      <h3>Résultats de recherche</h3>
-      <p class="search-results-count">{{ movies.length }} film(s) trouvé(s)</p>
-    </div>
-
     <div *ngIf="hasSearched && !loading && movies.length > 0" class="movies-grid">
       <ion-card *ngFor="let movie of movies" (click)="goToMovie(movie.id)" class="movie-card">
         <ion-img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title"></ion-img>

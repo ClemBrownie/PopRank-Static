@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonImg, IonSpinner, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { TmdbService } from '../../services/tmdb.service';
+import { EntriesService } from '../../services/entries.service';
+import { AuthService } from '../../services/auth.service';
 import { Entry } from '../../models/entry.model';
 
 @Component({
@@ -15,6 +17,8 @@ import { Entry } from '../../models/entry.model';
 })
 export class WatchedPage implements OnInit {
   private tmdbService = inject(TmdbService);
+  private entriesService = inject(EntriesService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   
   entries: Entry[] = [];
@@ -26,19 +30,38 @@ export class WatchedPage implements OnInit {
     this.loadWatchedMovies();
   }
 
-  loadWatchedMovies() {
+  loadWatchedMovies(refreshEvent?: any) {
     this.loading = true;
-    // Pour l'instant, on simule une liste vide
-    // Dans une vraie app, on récupérerait depuis le service
-    setTimeout(() => {
-      this.entries = [];
+    
+    const user = this.authService.getCurrentUser();
+    if (!user) {
       this.loading = false;
-    }, 1000);
+      if (refreshEvent) {
+        refreshEvent.target.complete();
+      }
+      return;
+    }
+
+    this.entriesService.getMyEntries(user.uid).subscribe({
+      next: (entries) => {
+        this.entries = entries;
+        this.loading = false;
+        if (refreshEvent) {
+          refreshEvent.target.complete();
+        }
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des films vus:', error);
+        this.loading = false;
+        if (refreshEvent) {
+          refreshEvent.target.complete();
+        }
+      }
+    });
   }
 
   refreshWatchedMovies(event: any) {
-    this.loadWatchedMovies();
-    event.target.complete();
+    this.loadWatchedMovies(event);
   }
 
   goToMovie(movieId: number) {

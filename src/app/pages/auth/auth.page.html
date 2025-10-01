@@ -13,6 +13,61 @@
         <ion-icon name="logo-google" slot="start"></ion-icon>
         Se connecter avec Google
       </ion-button>
+      
+      <!-- Bouton de test pour les logs (à supprimer en production) -->
+      <ion-button 
+        expand="block" 
+        fill="clear" 
+        (click)="testDebugLogs()"
+        color="medium"
+        size="small">
+        Tester les logs de debug
+      </ion-button>
+    </div>
+
+    <!-- Section de debug pour les logs -->
+    <div class="debug-section" *ngIf="debugLogs">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Logs de Debug - Connexion Google</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button 
+            expand="block" 
+            fill="outline" 
+            (click)="toggleDebugLogs()"
+            color="medium">
+            {{ showDebugLogs ? 'Masquer les logs' : 'Afficher les logs' }}
+          </ion-button>
+          
+          <div *ngIf="showDebugLogs" class="debug-content">
+            <ion-item>
+              <ion-label>
+                <h3>Logs détaillés de la connexion Google</h3>
+                <p>Copiez ces informations pour le support technique</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-textarea
+              [value]="debugLogs"
+              readonly
+              rows="15"
+              placeholder="Les logs de debug apparaîtront ici..."
+              class="debug-textarea">
+            </ion-textarea>
+            
+            <ion-button 
+              expand="block" 
+              fill="solid" 
+              (click)="copyDebugLogs()"
+              color="primary"
+              class="copy-button">
+              <ion-icon name="copy-outline" slot="start"></ion-icon>
+              Copier les logs
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </div>
   </div>
 </ion-content>

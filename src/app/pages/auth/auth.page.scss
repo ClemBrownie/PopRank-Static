@@ -31,3 +31,29 @@
   height: 50px;
   font-size: 1rem;
 }
+
+.debug-section {
+  margin-top: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.debug-content {
+  margin-top: 15px;
+}
+
+.debug-textarea {
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-dark);
+  --padding: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 10px 0;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 8px;
+}
+
+.copy-button {
+  margin-top: 10px;
+}

@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "177488329798-gcbstlgr5seubdds92lht0lisbgbrjdb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.poprank.app",
+            "certificate_hash": "cf8f4066f3b04da34fbaf9294e6c350f68486515"
+          }
+        },
+        {
           "client_id": "177488329798-s0hqnhqot580fgjcvtjf1t860qmbeopp.apps.googleusercontent.com",
           "client_type": 3
         }
